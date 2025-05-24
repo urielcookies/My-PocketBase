@@ -11,12 +11,10 @@ COPY ./pocketbase /app/pocketbase
 # Make the PocketBase executable runnable
 RUN chmod +x /app/pocketbase
 
-# PocketBase will store its data in /pb_data by default when using the --dir flag.
-# Declare this as a volume so Railway can mount persistent storage here.
-# This is CRUCIAL for your data to persist across deployments/restarts.
-VOLUME /pb_data
+# DO NOT declare VOLUME here for Railway.
+# You will define the volume and its mount path in the Railway dashboard.
 
-# Expose the port PocketBase will listen on inside the container.
+# Expose the default port PocketBase will listen on inside the container.
 # Railway will automatically map traffic from its public URL to this port.
 EXPOSE 8090
 
